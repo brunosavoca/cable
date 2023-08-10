@@ -31,22 +31,33 @@ def paraphrase_text(text, api_key):
     return paraphrased_text
 
 # Streamlit UI
-st.title('Reinterpretación de artículos')
+
+tab1, tab2 = st.tabs(["Comenzar con una URL", "Comenzar con un texto de referencia"])
+
 with st.sidebar:
     st.header("Configuración de clave")
     openai_api_key = st.text_input('Ingresa la clave que recibiste:')
 
-url_input = st.text_input('Ingrese la URL:')
-if st.button('Cargar URL'):
-    text = extract_text_from_url(url_input)
-    st.text_area("Texto original:", value=text, height=200)  # Preview of extracted text
-    st.session_state.text_to_paraphrase = text
+with tab1:
+    st.header("Comenzar con una URL")
+    url_input = st.text_input('Ingrese la URL:')
+    if st.button('Cargar URL'):
+        text = extract_text_from_url(url_input)
+        st.text_area("Texto original:", value=text, height=200)
+        st.session_state.text_to_paraphrase = text
 
-if st.button('Reinterpretar'):
-    if 'text_to_paraphrase' in st.session_state:
+    if st.button('Reinterpretar URL'):
+        if 'text_to_paraphrase' in st.session_state:
+            with st.spinner('Procesando...'):
+                paraphrased_text = paraphrase_text(st.session_state.text_to_paraphrase, openai_api_key)
+                st.text_area("Texto reinterpretado:", value=paraphrased_text, height=200)
+        else:
+            st.warning('Por favor, primero haga clic en "Cargar URL" antes de reinterpretar.')
+
+with tab2:
+    st.header('Comenzar con un texto de referencia')
+    text_input = st.text_area('Ingrese su texto de referencia:', height=200)
+    if st.button('Reinterpretar Texto'):
         with st.spinner('Procesando...'):
-            paraphrased_text = paraphrase_text(st.session_state.text_to_paraphrase, openai_api_key)
-            st.text_area("Texto reinterpretado:", value=paraphrased_text, height=600)  # Display paraphrased text in text area
-    else:
-        st.warning('Por favor, primero haga clic en "Cargar URL" antes de reinterpretar.')
-
+            paraphrased_text = paraphrase_text(text_input, openai_api_key)
+            st.text_area("Texto reinterpretado:", value=paraphrased_text, height=200)
