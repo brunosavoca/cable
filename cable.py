@@ -23,12 +23,10 @@ def paraphrase_text(text, api_key):
             },
             {
                 "role": "user",
-                "content": f"Write an article in Spanish, \
-                Take all the information in this {text} and write an article as complete and detailed as possible.\
-                Write a 100% unique, creative, and human-like article.\
+                "content": f"Paraphrase in Spanish using a similar amount of words that this given {text}\
                 Use transitional phrases, interjections, dangling modifiers, and colloquialisms to create a natural style,\
                 and avoid repetitive phrases and unnatural sentence structures. \
-                Writing style should be like that of The New York Times.\
+                The writing style should be like that of The New York Times.\
                 Stick only to the information contained in the source texts without\
                 resourcing to your database or any other source, additions, or inventions.\
                 Meticulously check names and details when paraphrasing to avoid inaccuracies.\
