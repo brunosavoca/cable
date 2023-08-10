@@ -23,7 +23,17 @@ def paraphrase_text(text, api_key):
             },
             {
                 "role": "user",
-                "content": f"Write an article in Spanish, following this style of Reuters, writing style is characterized by its objectivity, clarity, and conciseness. It focuses on presenting the most relevant facts in an unbiased and accurate manner, using simple, direct language with the text: {text} Also, start each sentence with a capital letter and end it with a period. Add a SEO Friendly title and end the article with 10 SEO Keywords."
+                "content": f"Write an article in Spanish, \
+                Take all the information in this {text} and write an article as complete and detailed as possible.\
+                Write a 100% unique, creative, and human-like article.\
+                Use transitional phrases, interjections, dangling modifiers, and colloquialisms to create a natural style,\
+                and avoid repetitive phrases and unnatural sentence structures. \
+                Writing style should be like that of The New York Times.\
+                Stick only to the information contained in the source texts without\
+                resourcing to your database or any other source, additions, or inventions.\
+                Meticulously check names and details when paraphrasing to avoid inaccuracies.\
+                Avoid repeating words or ideas, and avoid qualifying adjectives.\
+                When quoting textually, add the corresponding attribution."
             }
         ],
     )
